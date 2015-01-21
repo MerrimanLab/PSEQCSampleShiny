@@ -1,12 +1,12 @@
 {
-    "contents" : "\nlibrary(shiny)\npoly_stats = read.table('~/eli_resquence/ggvis/poly_stats.istats',header=T)\n\n# Define UI for miles per gallon application\nshinyUI(pageWithSidebar(\n  \n  # Application title\n  headerPanel(\"Resquencing QC\"),\n  sidebarPanel(\n    conditionalPanel(condition=\"input.conditionedPanels == 'QC Table'\"\n                     ,checkboxGroupInput('show_vars',\"Columns in polynesians stats file to show:\", names(poly_stats),\n    selected = names(poly_stats))\n  ),\n    conditionalPanel(condition = \"input.conditionedPanels == 'Plots'\",\n                     selectInput(\"first_field\",\"First Field\",\n                      choices=names(poly_stats)[2:length(names(poly_stats))])\n  ),\n   conditionalPanel(condition = \"input.conditionedPanels == 'Plots'\",\n                  selectInput(\"second_field\",\"Second Field\",\n                              choices=names(poly_stats)[2:length(names(poly_stats))])\n  )\n  ),\n  mainPanel(\n      tabsetPanel(\n        tabPanel('QC Table',\n          dataTableOutput(\"qc_table\")),\n        tabPanel('IndivualPlots', \n          ggvisOutput('qc_plots')),\n        id= \"conditionedPanels\"\n      ),tabPanel(\"MDSplots\")\n    )\n  )\n)",
+    "contents" : "library(RAmazonS3)\nlibrary(shiny)\noptions(AmazonS3=c('AKIAIBWPAL7F24QILCNQ'='5gaTpC5/igl27fPk/rTXotDOxnlLosr6P0dByZ78'))\npoly_stats = read.table('~/eli_resquence/ggvis/poly_stats.istats',header=T)\ns3Load(\"resquencingstorage/poly_stats.RData\")\n\n# Define UI for miles per gallon application\nshinyUI(pageWithSidebar(\n  \n  # Application title\n  headerPanel(\"Resquencing QC\"),\n  sidebarPanel(\n    conditionalPanel(condition=\"input.conditionedPanels == 'QC Table'\"\n                     ,checkboxGroupInput('show_vars',\"Columns in polynesians stats file to show:\", names(poly_stats),\n    selected = names(poly_stats))\n  ),\n    conditionalPanel(condition = \"input.conditionedPanels == 'IndividualPlots'\",\n                     selectInput(\"first_field\",\"First Field\",\n                      choices=names(poly_stats)[2:length(names(poly_stats))])\n  ),\n   conditionalPanel(condition = \"input.conditionedPanels == 'IndividualPlots'\",\n                  selectInput(\"second_field\",\"Second Field\",\n                              choices=names(poly_stats)[3:length(names(poly_stats))])\n  )\n  ),\n  mainPanel(\n      tabsetPanel(\n        tabPanel('QC Table',\n          dataTableOutput(\"qc_table\")),\n        tabPanel('IndividualPlots', \n          ggvisOutput('qc_plots')),\n        id= \"conditionedPanels\"\n      )\n    )\n  )\n)",
     "created" : 1421550859975.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "103134481",
+    "hash" : "936390029",
     "id" : "89D02C2",
-    "lastKnownWriteTime" : 1421872785,
+    "lastKnownWriteTime" : 1421877681,
     "path" : "~/resequencing/ggvis/ui.R",
     "project_path" : "ui.R",
     "properties" : {

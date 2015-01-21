@@ -1,6 +1,9 @@
 library(shiny)
 library(ggvis)
 library(dplyr)
+options(AmazonS3=c('AKIAIBWPAL7F24QILCNQ'='5gaTpC5/igl27fPk/rTXotDOxnlLosr6P0dByZ78'))
+s3Load("resquencingstorage/poly_stats.RData")
+
 all_values = function(x) {
   if(is.null(x)) return(NULL)
   row = poly_stats[poly_stats$ID==x$ID, ]
