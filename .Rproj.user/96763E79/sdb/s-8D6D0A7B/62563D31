@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nlibrary(ggvis)\nlibrary(dplyr)\nall_values = function(x) {\n  if(is.null(x)) return(NULL)\n  row = poly_stats[poly_stats$ID==x$ID, ]\n  paste0(names(row), \": \", format(row), collapse = \"<br />\")\n}\npoly_stats = read.table('~/eli_resquence/ggvis/poly_stats.istats',header=T)\n\n# Define server logic required to plot various variables against mpg\nshinyServer(function(input, output) {\n  \n  output$qc_table = renderDataTable({\n    poly_stats[,input$show_vars, drop=FALSE]\n  }, options = list(orderClasses = TRUE))\n  \n   \n   poly_rct_df = reactive({\n     data.frame(ID=poly_stats$ID,X=poly_stats[,names(poly_stats) == input$first_field],\n                              Y=poly_stats[,names(poly_stats) == input$second_field])\n})\n  axis_x = reactive({\n    input$first_field\n  })\n  axis_y = reactive({\n    input$second_field\n  })\n reactive({   poly_rct_df %>% ggvis(x=~X,y=~Y, key:=~ID) %>% layer_points() %>%\n     add_tooltip(all_values,'hover') %>% add_axis(\"x\",title=axis_x()) %>%\n  add_axis(\"y\", title=axis_y()) }) %>% bind_shiny(\"qc_plots\") \n  # Create Shiny variable to allow exploration of the QC data.  \n   \n})\n",
+    "created" : 1421550872202.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1161667836",
+    "id" : "62563D31",
+    "lastKnownWriteTime" : 1421556862,
+    "path" : "~/resequencing/ggvis/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,9 @@
+{
+    "path" : "~/resequencing/ggvis",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
