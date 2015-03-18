@@ -1,7 +1,6 @@
 library(ggvis)
 library(dplyr)
-poly_stats = read.table('~/eli_resquence/ggvis/poly_stats.istats',header=T)
-
+poly_stats = read.table('poly_stats.istats',header=T)
 
 all_values = function(x) {
  if(is.null(x)) return(NULL)
