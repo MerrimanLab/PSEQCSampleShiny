@@ -3,9 +3,9 @@ library(ggvis)
 library(dplyr)
 #options(AmazonS3=c('AKIAIBWPAL7F24QILCNQ'='5gaTpC5/igl27fPk/rTXotDOxnlLosr6P0dByZ78'))
 #s3Load("resquencingstorage/poly_stats.RData")
-mds=read.table("mds.txt",header=T)
+mds=read.table("plink.mds",header=T)
 phenotypes=read.table("phenotypes_filter.txt",header=T)
-urate=read.table("urate.txt",header=F)
+urate=read.table("pheno_euro.txt",header=F)
 colnames(urate) = c("name","hyper")
 
 all_values = function(x) {
@@ -34,7 +34,7 @@ remove_values = function(x){
   
   
 }
-poly_stats = read.table('poly_stats.istats',header=T)
+poly_stats = read.table('euro.istats',header=T)
 all_sample <<- 1:length(poly_stats$ID)
 
 
