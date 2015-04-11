@@ -51,7 +51,7 @@ shinyUI(pageWithSidebar(
   ),
   conditionalPanel(condition = "input.conditionedPanels == 'MDS'",
                   selectInput("phenotypes","Phenotypes",
-                                choices=c('AGECOL','SEX','ETHCLASS',"URATE")
+                                choices=c("URATE")
                               )
   )
 
