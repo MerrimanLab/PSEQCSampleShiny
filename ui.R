@@ -2,7 +2,7 @@
 library(shiny)
 library(ggvis)
 #options(AmazonS3=c('AKIAIBWPAL7F24QILCNQ'='5gaTpC5/igl27fPk/rTXotDOxnlLosr6P0dByZ78'))
-poly_stats = read.table('euro.istats',header=T)
+poly_stats = read.table('all.istats',header=T)
 mds=read.table("plink.mds",header=T)
 phenotypes=read.table("phenotypes_filter.txt",header=T)
 #s3Load("resquencingstorage/poly_stats.RData")

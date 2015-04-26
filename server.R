@@ -34,7 +34,7 @@ remove_values = function(x){
   
   
 }
-poly_stats = read.table('euro.istats',header=T)
+poly_stats = read.table('all.istats',header=T)
 all_sample <<- 1:length(poly_stats$ID)
 
 
