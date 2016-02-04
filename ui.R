@@ -2,40 +2,34 @@
 library(shiny)
 library(ggvis)
 #options(AmazonS3=c('AKIAIBWPAL7F24QILCNQ'='5gaTpC5/igl27fPk/rTXotDOxnlLosr6P0dByZ78'))
-poly_stats = read.table('all.istats',header=T)
-mds=read.table("plink.mds",header=T)
-phenotypes=read.table("phenotypes_filter.txt",header=T)
 #s3Load("resquencingstorage/poly_stats.RData")
-urate=read.table("pheno_euro.txt",header=F)
-colnames(urate) = c("name","hyper")
 # Define UI for miles per gallon application
 shinyUI(pageWithSidebar(
   
   # Application title
-  headerPanel("Individual QC"),
+  headerPanel("PSEQC - Samples"),
   sidebarPanel(
+    fileInput('datafile', 'Choose PSEQC sample metrics input file',
+              accept="text"),
     conditionalPanel(condition="input.conditionedPanels == 'QC Table'"
-                     ,checkboxGroupInput('show_vars',"Columns in polynesians stats file to show:", names(poly_stats),
-    selected = names(poly_stats))
+                     ,uiOutput('show_vars')
   ),
     conditionalPanel(condition = "input.conditionedPanels == 'IndividualPlots'",
-                     selectInput("first_field","First Field",
-                      choices=names(poly_stats)[2:length(names(poly_stats))])
+                   uiOutput("page_two_first")
   ),
-   conditionalPanel(condition = "input.conditionedPanels == 'IndividualPlots'",
-                  selectInput("second_field","Second Field",
-                              choices=names(poly_stats)[2:length(names(poly_stats))])
+    conditionalPanel(condition = "input.conditionedPanels == 'IndividualPlots'",
+                     uiOutput("page_two_second")
   ),
   conditionalPanel(condition = "input.conditionedPanels == 'IndividualPlots'",
-                   actionButton("refresh_samples","Refresh Plot",
+                   actionButton("refresh_samples","Refresh Plot"
                    )
   ),
    conditionalPanel(condition = "input.conditionedPanels == 'IndividualPlots'",
-                     downloadButton("download_s","Download Sample Remaining",
+                     downloadButton("download_s","Download Sample Remaining"
                       )
   ),
   conditionalPanel(condition = "input.conditionedPanels == 'IndividualPlots'",
-                   actionButton("reset_samples","Reset deleted Samples",
+                   actionButton("reset_samples","Reset deleted Samples"
                    )
     
   ),
